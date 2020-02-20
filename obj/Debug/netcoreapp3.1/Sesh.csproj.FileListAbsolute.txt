@@ -94,3 +94,4 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.Views.pdb
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.csproj.CopyComplete
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.dll
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.pdb
+F:\Projects\personal\Budget\Sesh\bin\Debug\netcoreapp3.1\efpt.config.json

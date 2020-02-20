@@ -1,0 +1,42 @@
+﻿{
+   "ContextClassName": "SeshContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Data\\Sesh",
+   "ProjectRootNamespace": "SeshDB",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Accounts]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[BudgetedItems]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Classifications]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Payees]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Transactions]"
+      }
+   ],
+   "UseDatabaseNames": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}

@@ -1,0 +1,12 @@
+Project Tracking
+
+
+Milestones:
+
+1.Build Data Model - Complete
+
+2.Develop components to manage crud operations
+
+3.Develop navigation
+
+4.Make it pretty
