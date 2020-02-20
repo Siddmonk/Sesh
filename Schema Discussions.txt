@@ -1,0 +1,108 @@
+Schema
+
+BudgetedItems
+Transactions
+Users
+BudgetClassifications
+Payees
+Accounts
+
+
+
+BudgetClassifications
+	ID				INT NOT NULL PRIMARY KEY,
+	Name			NVARCHAR(50),
+	UserName		NVARCHAR(50)
+
+BudgetedItems
+	ID				INT NOT NULL PRIMARY KEY,
+	ClassId			INT (Foreign Key BudgetClassifications.ClassId),
+	Name			NVARCHAR(50),
+	BudgetedAmount	INT,
+	LastActiveMonth	DATETIME,
+	CurrentBalance	INT,
+	UserName		NVARCHAR(50)
+
+Transactions
+	TransactionId	INT NOT NULL PRIMARY KEY,
+	AccountId		INT NOT NULL (Foreign Key Accounts.AccountId),
+	TransactionDate	DATETIME,
+	PayeeId			INT NOT NULL (Foreign Key Payees.PayeeId),
+	ItemId			INT NOT NULL (Foreign Key BudgetedItems.ItemId),
+	Memo			NVARCHAR(50),
+	DebitAmount		INT,
+	CreditAmount	INT,
+	UserName		NVARCHAR(50)
+
+Payess
+	PayeeId			INT NOT NULL PRIMARY KEY,
+	PayeeName		NVARCHAR(50),
+	UserName		NVARCHAR(50)
+
+Accounts
+	AccountId		INT NOT NULL PRIMARY KEY,
+	AccountName		NVARCHAR(50),
+	UserName		NVARCHAR(50)
+
+
+
+
+
+
+When we query the budget items
+
+budgeted amounts will need to be tracked for the month they are in?
+
+If no data exists for current month previous month can be used?
+
+One table to track changes?
+
+Built in change tracking
+
+Every budget item has a different entry for each month?
+
+####
+We can track an item in a single row until it changes.  We can assign a property to it "Last Active Month"
+as long as that value is NULL we can continue to use it.  Once the user changes the budgeted amount the 
+"Last active month" will be set to the previous month and a new entry will be created.  When querying we will 
+look for all items belonging to the user with NULL for the last active month.  If a user tries to query 
+against older data we will first look for entries that were last active in the matching month of the 
+supplied view, and if none is found finding a matching NULL entry.
+#####
+
+#####
+We will have a table to track all transactions, and a table to track all budgeted amounts.
+
+The budget view will need to query both tables.  One query to get all the budgeted amounts for a given month,
+and another query to see all transactions applied against that query in the given month.  
+####
+Previous months may have a balance forward.  
+
+These can be tracked in another table??
+
+If we track them as transactions we have to worry about updating them if someone updates retroactively.
+
+####
+We can track the balance forward in the budgeted amount table?
+###
+
+How does this work?
+
+####
+Whenever a transaction is applied against a given item the current balance can be calculated and the BudgetedItems
+table updated.
+####
+
+do we need a table to store classifications.  We can just as easily put this into a budgeteditems column.
+
+###
+We still need it to make the user interface easier.  We creating new items grabbing the list of classifications will
+be easier/faster
+###
+
+
+
+
+
+
+
