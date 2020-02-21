@@ -10,3 +10,28 @@ Milestones:
 3.Develop navigation
 
 4.Make it pretty
+
+
+The services folder will contain all of our crud operations.  We will need services to connect
+to each database tables.
+
+AccountService
+BudgetedItemService
+ClassificationService
+PayeeService
+TransactionService
+
+each will have four tasks
+Get____Async
+Create____Async
+Update____Async
+Delete____Async
+
+the component level will contain the logic to 
+display everything accept inputs and manage
+data validation.  That seems like alot, am I missing
+something?
+
+What is MVP?  
+At minimum must be able to create and modify accounts, create and modify budget items, record account transactions,
+maintain balances, display the budget view, and display the ledger view. 

@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+﻿@page "/accountview"
 
 @using Sesh.Data
 @using SeshDB.Data.Sesh
@@ -10,13 +10,13 @@
     that share its scope are disposed with the component.
 *@
 
-@inherits OwningComponentBase<BudgetService>
+@inherits OwningComponentBase<AccountService>
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (budgetedItems == null)
+@if (accounts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -25,20 +25,18 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Amount</th>
+                <th>ID</th>
                 <th>Name</th>
-                <th>CurrentBalance</th>
-                <th>Class Id</th>
+                <th>CurrentBalance</th>                
             </tr>
         </thead>
         <tbody>
-            @foreach (var budgetedItem in budgetedItems)
+            @foreach (var account in accounts)
             {
                 <tr>
-                    <td>@budgetedItem.BudgetedAmount</td>
-                    <td>@budgetedItem.BudgetItemName</td>
-                    <td>@budgetedItem.CurrentBalance</td>
-                    <td>@budgetedItem.ClassId</td>
+                    <td>@account.AccountId</td>
+                    <td>@account.AccountName</td>
+                    <td>@account.CurrentBalance</td>                    
                 </tr>
             }
         </tbody>
@@ -50,14 +48,14 @@ else
 
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
-    List<BudgetedItems> budgetedItems;
+    List<Accounts> accounts;
 
     protected override async Task OnInitializedAsync()
     {
         // Get the current user
         var user = (await authenticationStateTask).User;
-        // Get the budgeted items for the current user
-        // We access BudgetServices using @Service
-        budgetedItems = await @Service.GetBudgetItemAsync(user.Identity.Name);
+        // Get the accounts for the current user
+        // We access AccountService using @Service
+        accounts = await @Service.GetAccountsAsync(user.Identity.Name);
     }
 }

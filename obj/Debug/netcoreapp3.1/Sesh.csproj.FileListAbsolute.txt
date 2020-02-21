@@ -60,9 +60,7 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.MvcApplicationPart
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.MvcApplicationPartsAssemblyInfo.cache
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.RazorComponent.input.cache
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\App.razor.g.cs
-F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Counter.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Error.razor.g.cs
-F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\FetchData.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\LoginDisplay.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -73,9 +71,7 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.TagHelpers.input.c
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.TagHelpers.output.cache
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.RazorCoreGenerate.cache
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\App.razor.g.cs
-F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\Counter.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\Error.razor.g.cs
-F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\FetchData.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Shared\LoginDisplay.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
@@ -95,3 +91,7 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.csproj.CopyComplet
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.dll
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Sesh.pdb
 F:\Projects\personal\Budget\Sesh\bin\Debug\netcoreapp3.1\efpt.config.json
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\AccountView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\AccountView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\BudgetView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\BudgetView.razor.g.cs

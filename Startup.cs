@@ -40,6 +40,7 @@ namespace Sesh
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<BudgetService>();
+            services.AddScoped<AccountService>();
             services.AddDbContext<SeshDB.Data.Sesh.SeshContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
