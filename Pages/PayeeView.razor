@@ -1,0 +1,61 @@
+﻿@page "/payeeview"
+
+@using Sesh.Data
+@using SeshDB.Data.Sesh
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@*
+    Using OwningComponentBase ensures that the service and related services
+    that share its scope are disposed with the component.
+*@
+
+@inherits OwningComponentBase<PayeeService>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (payees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Payee Id</th>
+                <th>Payee Name</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payee in payees)
+            {
+                <tr>
+                    <td>@payee.PayeeId</td>
+                    <td>@payee.PayeeName</td>
+                    <td>@payee.UserName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    //AuthenticationState is available as a CascadingParameter
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    List<Payees> payees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get the current user
+        var user = (await authenticationStateTask).User;
+        // Get the budgeted items for the current user
+        // We access BudgetServices using @Service
+        payees = await @Service.GetPayeesAsync(user.Identity.Name);
+    }
+}

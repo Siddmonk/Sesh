@@ -95,3 +95,11 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\AccountView.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\BudgetView.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\BudgetView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\ClassificationView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\PayeeView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\TransactionView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\ClassificationView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\PayeeView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\TransactionView.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\AccountIdToName.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\AccountIdToName.razor.g.cs

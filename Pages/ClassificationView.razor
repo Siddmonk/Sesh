@@ -1,0 +1,61 @@
+﻿@page "/classificationview"
+
+@using Sesh.Data
+@using SeshDB.Data.Sesh
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@*
+    Using OwningComponentBase ensures that the service and related services
+    that share its scope are disposed with the component.
+*@
+
+@inherits OwningComponentBase<ClassificationService>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (classifications == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Class Id</th>
+                <th>Name</th>
+                <th>UserName</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var classification in classifications)
+            {
+                <tr>
+                    <td>@classification.ClassId</td>
+                    <td>@classification.ClassName</td>
+                    <td>@classification.UserName</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    //AuthenticationState is available as a CascadingParameter
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    List<Classifications> classifications;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get the current user
+        var user = (await authenticationStateTask).User;
+        // Get the budgeted items for the current user
+        // We access BudgetServices using @Service
+        classifications = await @Service.GetClassificationsAsync(user.Identity.Name);
+    }
+}

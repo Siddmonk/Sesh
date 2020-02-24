@@ -14,6 +14,7 @@ namespace SeshDB.Data.Sesh
         public string Memo { get; set; }
         public int? DebitAmount { get; set; }
         public int? CreditAmount { get; set; }
+        public string UserName { get; set; }
 
         public virtual Accounts Account { get; set; }
         public virtual BudgetedItems Item { get; set; }
