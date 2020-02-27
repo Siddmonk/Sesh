@@ -8,13 +8,13 @@ namespace SeshDB.Data.Sesh
     {
         public Classifications()
         {
-            BudgetedItems = new HashSet<BudgetedItems>();
+            BudgetedItems = new HashSet<Categories>();
         }
 
         public int ClassId { get; set; }
         public string ClassName { get; set; }
         public string UserName { get; set; }
 
-        public virtual ICollection<BudgetedItems> BudgetedItems { get; set; }
+        public virtual ICollection<Categories> BudgetedItems { get; set; }
     }
 }

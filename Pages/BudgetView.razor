@@ -10,7 +10,7 @@
     that share its scope are disposed with the component.
 *@
 
-@inherits OwningComponentBase<BudgetService>
+@inherits OwningComponentBase<TransactionService>
 
 <h1>Weather forecast</h1>
 
@@ -50,7 +50,7 @@ else
 
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
-    List<BudgetedItems> budgetedItems;
+    List<Categories> budgetedItems;
 
     protected override async Task OnInitializedAsync()
     {
@@ -58,6 +58,6 @@ else
         var user = (await authenticationStateTask).User;
         // Get the budgeted items for the current user
         // We access BudgetServices using @Service
-        budgetedItems = await @Service.GetBudgetItemAsync(user.Identity.Name);
+        budgetedItems = await @Service.GetCategoriesAsync(user.Identity.Name);
     }
 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace SeshDB.Data.Sesh
 {
-    public partial class BudgetedItems
+    public partial class Categories
     {
-        public BudgetedItems()
+        public Categories()
         {
             Transactions = new HashSet<Transactions>();
         }

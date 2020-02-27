@@ -39,11 +39,7 @@ namespace Sesh
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddScoped<BudgetService>();
-            services.AddScoped<AccountService>();
             services.AddScoped<TransactionService>();
-            services.AddScoped<PayeeService>();
-            services.AddScoped<ClassificationService>();
             services.AddDbContext<SeshDB.Data.Sesh.SeshContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

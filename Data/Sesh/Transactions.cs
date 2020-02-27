@@ -17,7 +17,7 @@ namespace SeshDB.Data.Sesh
         public string UserName { get; set; }
 
         public virtual Accounts Account { get; set; }
-        public virtual BudgetedItems Item { get; set; }
+        public virtual Categories Item { get; set; }
         public virtual Payees Payee { get; set; }
     }
 }

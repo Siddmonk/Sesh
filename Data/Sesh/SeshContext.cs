@@ -17,7 +17,7 @@ namespace SeshDB.Data.Sesh
         }
 
         public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<BudgetedItems> BudgetedItems { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Classifications> Classifications { get; set; }
         public virtual DbSet<Payees> Payees { get; set; }
         public virtual DbSet<Transactions> Transactions { get; set; }
@@ -47,7 +47,7 @@ namespace SeshDB.Data.Sesh
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<BudgetedItems>(entity =>
+            modelBuilder.Entity<Categories>(entity =>
             {
                 entity.HasKey(e => e.ItemId)
                     .HasName("PK__Budgeted__727E838B0D1A96B4");

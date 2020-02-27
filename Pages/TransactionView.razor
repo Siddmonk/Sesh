@@ -71,22 +71,22 @@ else
                     </div>
                     <!-- Edit form for the current forecast -->
                     <div class="modal-body">
-                        <select class="form-control">
-                            @foreach (var i in AccountList)
+                        <select class="form-control" @bind-value="objTransaction.AccountId" @bind-value:event="onchange">
+                            @foreach (KeyValuePair<int, string> entry in accountDict)
                                 {
-                                <option>@i</option>                                    
+                                <option value="@entry.Key">@entry.Value</option>                                    
                                 }
                         </select>
-                        <select class="form-control">
-                            @foreach (var i in PayeeList)
+                        <select class="form-control" @bind-value="objTransaction.PayeeId" @bind-value:event="onchange">
+                            @foreach (KeyValuePair<int, string> entry in payeeDict)
                             {
-                            <option>@i</option>
+                            <option value="@entry.Key">@entry.Value</option>
                             }
                         </select>
-                        <select class="form-control">
-                            @foreach (var i in CategoryList)
+                        <select class="form-control" @bind-value="objTransaction.ItemId" @bind-value:event="onchange">
+                            @foreach (KeyValuePair<int, string> entry in catDict)
                             {
-                            <option>@i</option>
+                            <option value="@entry.Key">@entry.Value</option>
                             }
                         </select>
                         <input class="form-control" type="text"
@@ -110,7 +110,7 @@ else
         </div>
 
     }
-}
+};
 
 @code {
     //AuthenticationState is available as a CascadingParameter
@@ -118,26 +118,22 @@ else
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
     List<Transactions> transactions;
-
-    [Parameter]
-    public int PayeeId { get; set; }
-    [Parameter]
-    public int ItemId { get; set; }
-    [Parameter]
-    public int AccountId { get; set; }
-
-    List<string> AccountList = new List<string> { "Checking", "Savings" };
-    List<string> PayeeList = new List<string> { "Tops", "Wegmans" };
-    List<string> CategoryList = new List<string> { "Groceries", "Rent" };
-    
-
+    Dictionary<int, string> accountDict;
+    Dictionary<int, string> payeeDict;
+    Dictionary<int, string> catDict;
+     
     protected override async Task OnInitializedAsync()
     {
         // Get the current user
         var user = (await authenticationStateTask).User;
-        // Get the budgeted items for the current user
-        // We access BudgetServices using @Service
+        // Get the Transactions for the current user        
         transactions = await @Service.GetTransactionsAsync(user.Identity.Name);
+        // Get a Dictionary of User Accounts
+        accountDict = await @Service.GetAccountKeyValuesAsync(user.Identity.Name);
+        // Get a Dictionary of Payees
+        payeeDict = await @Service.GetPayeeKeyValuesAsync(user.Identity.Name);
+        // Get a Dictionary of Categories
+        catDict = await @Service.GetCatKeyValuesAsync(user.Identity.Name);
     }
 
     Transactions objTransaction = new Transactions();
@@ -162,10 +158,10 @@ else
         {
             //create new transaction
             Transactions objNewTransaction = new Transactions();
-            //objNewTransaction.Account = 
+            objNewTransaction.AccountId = objTransaction.AccountId;
             objNewTransaction.TransactionDate = System.DateTime.Now;
-            //objNewTransaction.Payee = 
-            //objNewTransaction.Item = 
+            objNewTransaction.PayeeId = objTransaction.PayeeId;
+            objNewTransaction.ItemId = objTransaction.ItemId;
             objNewTransaction.Memo = objTransaction.Memo;
             objNewTransaction.DebitAmount = objTransaction.DebitAmount;
             objNewTransaction.CreditAmount = objTransaction.CreditAmount;
@@ -175,8 +171,9 @@ else
         }
         else
         {
-
+            @* TODO Add method to edit Transactions *@        
         }
+
         transactions = await @Service.GetTransactionsAsync(user.Identity.Name);
     }
 }
