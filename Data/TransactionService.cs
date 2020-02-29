@@ -32,6 +32,30 @@ namespace Sesh.Data
             _context.SaveChanges();
             return Task.FromResult(objTransaction);
         }
+        public Task<bool>
+            UpdateTransactionAsync(Transactions objTransaction)
+        {
+            var ExistingTransaction = _context.Transactions
+                .Where(x => x.TransactionId == objTransaction.TransactionId)
+                .FirstOrDefault();
+            if (ExistingTransaction != null)
+            {
+                ExistingTransaction.AccountId = objTransaction.AccountId;
+                ExistingTransaction.TransactionDate = objTransaction.TransactionDate;
+                ExistingTransaction.PayeeId = objTransaction.PayeeId;
+                ExistingTransaction.ItemId = objTransaction.ItemId;
+                ExistingTransaction.Memo = objTransaction.Memo;
+                ExistingTransaction.DebitAmount = objTransaction.DebitAmount;
+                ExistingTransaction.CreditAmount = objTransaction.CreditAmount;
+                ExistingTransaction.UserName = objTransaction.UserName;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
+        }
 
 
         //Account Services
@@ -49,6 +73,23 @@ namespace Sesh.Data
             return await _context.Accounts
                 .Where(x => x.UserName == strCurrentUser)
                 .AsNoTracking().ToDictionaryAsync(e => e.AccountId, f => f.AccountName);
+        }
+        public Task<bool>
+            UpdateAccountAsync(Accounts objAccount)
+        {
+            var ExistingAccount = _context.Accounts
+                .Where(x => x.AccountId == objAccount.AccountId)
+                .FirstOrDefault();
+            if (ExistingAccount != null)
+            {
+                ExistingAccount.AccountName = objAccount.AccountName;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
         }
 
 
@@ -68,6 +109,23 @@ namespace Sesh.Data
                 .Where(x => x.UserName == strCurrentUser)
                 .AsNoTracking().ToDictionaryAsync(e => e.PayeeId, f => f.PayeeName);
         }
+        public Task<bool>
+            UpdatePayeeAsync(Payees objPayee)
+        {
+            var ExistingPayee = _context.Payees
+                .Where(x => x.PayeeId == objPayee.PayeeId)
+                .FirstOrDefault();
+            if (ExistingPayee != null)
+            {
+                ExistingPayee.PayeeName = objPayee.PayeeName;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
+        }
 
 
         // Classification Services
@@ -86,6 +144,22 @@ namespace Sesh.Data
                 .Where(x => x.UserName == strCurrentUser)
                 .AsNoTracking().ToDictionaryAsync(e => e.ClassId, f => f.ClassName);
         }
+        public Task<bool>
+            UpdateClassAsync(Classifications objClassification)
+        {
+            var ExistingClassification = _context.Classifications
+                .Where(x => x.ClassId == objClassification.ClassId)
+                .FirstOrDefault();
+            if (ExistingClassification != null)
+            {
+                ExistingClassification.ClassName = objClassification.ClassName;
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
+        }
 
 
         // Category Services
@@ -103,6 +177,27 @@ namespace Sesh.Data
             return await _context.Categories
                 .Where(x => x.UserName == strCurrentUser)
                 .AsNoTracking().ToDictionaryAsync(e => e.ItemId, f => f.BudgetItemName);
+        }
+        public Task<bool>
+            UpdateCategoryAsync(Categories objCategory)
+        {
+            var ExistingCategory = _context.Categories
+                .Where(x => x.ItemId == objCategory.ItemId)
+                .FirstOrDefault();
+            if (ExistingCategory != null)
+            {
+                ExistingCategory.BudgetItemName = objCategory.BudgetItemName;
+                ExistingCategory.BudgetedAmount = objCategory.BudgetedAmount;
+                ExistingCategory.ClassId = objCategory.ClassId;
+                ExistingCategory.CurrentBalance = objCategory.CurrentBalance;
+                ExistingCategory.LastActiveMonth = objCategory.LastActiveMonth;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
         }
     }
 }

@@ -1,0 +1,136 @@
+﻿@using Sesh.Data
+@using SeshDB.Data.Sesh
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@inherits OwningComponentBase<TransactionService>
+
+<p><button class="btn btn-primary" @onclick="AddNewTransaction">Add New Transaction</button></p>
+
+@if (ShowPopup)
+
+{
+    <!-- This is the popup to create or edit a forecast -->
+    <div class="modal" tabindex="-1" style="display:block" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Forecast</h3>
+                    <!-- Button to close the popup -->
+                    <button type="button" class="close"
+                            @onclick="ClosePopup">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <!-- Edit form for the current forecast -->
+                <div class="modal-body">
+                    <select class="form-control" @bind-value="objTransaction.AccountId" @bind-value:event="onchange">
+                        @foreach (KeyValuePair<int, string> entry in accountDict)
+                        {
+                            <option value="@entry.Key">@entry.Value</option>
+
+                        }
+                    </select>
+                    <select class="form-control" @bind-value="objTransaction.PayeeId" @bind-value:event="onchange">
+                        @foreach (KeyValuePair<int, string> entry in payeeDict)
+                        {
+                            <option value="@entry.Key">@entry.Value</option>
+                        }
+                    </select>
+                    <select class="form-control" @bind-value="objTransaction.ItemId" @bind-value:event="onchange">
+                        @foreach (KeyValuePair<int, string> entry in catDict)
+                        {
+                            <option value="@entry.Key">@entry.Value</option>
+                        }
+                    </select>
+                    <input class="form-control" type="text"
+                           placeholder="Memo"
+                           @bind="objTransaction.Memo" />
+                    <input class="form-control" type="text"
+                           placeholder="Debit Amount"
+                           @bind="objTransaction.DebitAmount" />
+                    <input class="form-control" type="text"
+                           placeholder="Credit Amount"
+                           @bind="objTransaction.CreditAmount" />
+                    <br />
+                    <!-- Button to save the forecast -->
+                    <button class="btn btn-primary"
+                            @onmousedown="SaveTransaction">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@code {
+    // TODO See if context can be passed when this component is called
+    [Parameter]
+    public EventCallback<string> ComponentDataUpdated { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    Dictionary<int, string> accountDict;
+    Dictionary<int, string> payeeDict;
+    Dictionary<int, string> catDict;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get the current user
+        var user = (await authenticationStateTask).User;
+        // Get a Dictionary of User Accounts
+        accountDict = await @Service.GetAccountKeyValuesAsync(user.Identity.Name);
+        // Get a Dictionary of Payees
+        payeeDict = await @Service.GetPayeeKeyValuesAsync(user.Identity.Name);
+        // Get a Dictionary of Categories
+        catDict = await @Service.GetCatKeyValuesAsync(user.Identity.Name);
+    }
+
+    Transactions objTransaction = new Transactions();
+    bool ShowPopup = false;
+    void ClosePopup()
+    {
+        ShowPopup = false;
+    }
+    void AddNewTransaction()
+    {
+        objTransaction = new Transactions();
+        // Set Id to 0 so we know it is a new record
+        objTransaction.TransactionId = 0;
+        ShowPopup = true;
+    }
+    async Task SaveTransaction()
+    {
+        ShowPopup = false;
+        var user = (await authenticationStateTask).User;
+        // New transaction will have Id set to 0
+        if (objTransaction.TransactionId == 0)
+        {
+            //create new transaction
+            Transactions objNewTransaction = new Transactions();
+            objNewTransaction.AccountId = objTransaction.AccountId;
+            objNewTransaction.TransactionDate = System.DateTime.Now;
+            objNewTransaction.PayeeId = objTransaction.PayeeId;
+            objNewTransaction.ItemId = objTransaction.ItemId;
+            objNewTransaction.Memo = objTransaction.Memo;
+            objNewTransaction.DebitAmount = objTransaction.DebitAmount;
+            objNewTransaction.CreditAmount = objTransaction.CreditAmount;
+            objNewTransaction.UserName = user.Identity.Name;
+
+            var result = @Service.CreateTransactionAsync(objNewTransaction);
+        }
+        else
+        {
+            @* TODO Add method to edit Transactions *@
+        }
+        InvokeCallBack();
+    }
+
+    async Task InvokeCallBack()
+    {
+        await ComponentDataUpdated.InvokeAsync("");
+    }
+
+
+}

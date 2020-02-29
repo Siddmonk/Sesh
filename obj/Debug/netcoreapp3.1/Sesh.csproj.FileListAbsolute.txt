@@ -103,3 +103,5 @@ F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\PayeeView.r
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\TransactionView.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\AccountIdToName.razor.g.cs
 F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\AccountIdToName.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Modal.razor.g.cs
+F:\Projects\personal\Budget\Sesh\obj\Debug\netcoreapp3.1\Razor\Pages\Modal.razor.g.cs

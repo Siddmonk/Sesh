@@ -23,110 +23,58 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Transaction Id</th>
+            <tr>                
                 <th>Account</th>
                 <th>Transaction Date</th>
                 <th>Payee</th>
                 <th>Item</th>
                 <th>Memo</th>
                 <th>Debit Amount</th>
-                <th>Credit Amount</th>
-                <th>User Name</th>
+                <th>Credit Amount</th>  
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var transaction in transactions)
             {
-                <tr>
-                    <td>@transaction.TransactionId</td>
-                    <td>@transaction.AccountId</td>
+                <tr>                    
+                    <td><input type="text" placeholder="@accountDict.GetValueOrDefault(transaction.AccountId)"  /></td>
                     <td>@transaction.TransactionDate.ToShortDateString()</td>
-                    <td>@transaction.PayeeId</td>
-                    <td>@transaction.ItemId</td>
+                    <td>@payeeDict.GetValueOrDefault(transaction.PayeeId)</td>
+                    <td>@catDict.GetValueOrDefault(transaction.ItemId)</td>
                     <td>@transaction.Memo</td>
                     <td>@transaction.DebitAmount</td>
-                    <td>@transaction.CreditAmount</td>
-                    <td>@transaction.UserName</td>
+                    <td><input placeholder="@transaction.CreditAmount" type="text" /></td>
+                    <td>
+                        <button class="btn btn-primary">Edit</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-    <p><button class="btn btn-primary" @onclick="AddNewTransaction">Add New Transaction</button></p>
+}
 
-    @if (ShowPopup)
-
-    {
-        <!-- This is the popup to create or edit a forecast -->
-        <div class="modal" tabindex="-1" style="display:block" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Edit Forecast</h3>
-                        <!-- Button to close the popup -->
-                        <button type="button" class="close"
-                                @onclick="ClosePopup">
-                            <span aria-hidden="true">X</span>
-                        </button>
-                    </div>
-                    <!-- Edit form for the current forecast -->
-                    <div class="modal-body">
-                        <select class="form-control" @bind-value="objTransaction.AccountId" @bind-value:event="onchange">
-                            @foreach (KeyValuePair<int, string> entry in accountDict)
-                                {
-                                <option value="@entry.Key">@entry.Value</option>                                    
-                                }
-                        </select>
-                        <select class="form-control" @bind-value="objTransaction.PayeeId" @bind-value:event="onchange">
-                            @foreach (KeyValuePair<int, string> entry in payeeDict)
-                            {
-                            <option value="@entry.Key">@entry.Value</option>
-                            }
-                        </select>
-                        <select class="form-control" @bind-value="objTransaction.ItemId" @bind-value:event="onchange">
-                            @foreach (KeyValuePair<int, string> entry in catDict)
-                            {
-                            <option value="@entry.Key">@entry.Value</option>
-                            }
-                        </select>
-                        <input class="form-control" type="text"
-                               placeholder="Memo"
-                               @bind="objTransaction.Memo" />
-                        <input class="form-control" type="text"
-                               placeholder="Debit Amount"
-                               @bind="objTransaction.DebitAmount" />
-                        <input class="form-control" type="text"
-                               placeholder="Credit Amount"
-                               @bind="objTransaction.CreditAmount" />
-                        <br />
-                        <!-- Button to save the forecast -->
-                        <button class="btn btn-primary"
-                                @onclick="SaveTransaction">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    }
-};
+<Modal ComponentDataUpdated="ComponentUpdated"></Modal>
 
 @code {
-    //AuthenticationState is available as a CascadingParameter
 
+    
+
+    //AuthenticationState is available as a CascadingParameter
+    [CascadingParameter]
+    Transactions objTransaction { get; set; }
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
     List<Transactions> transactions;
     Dictionary<int, string> accountDict;
     Dictionary<int, string> payeeDict;
     Dictionary<int, string> catDict;
-     
+
     protected override async Task OnInitializedAsync()
     {
         // Get the current user
         var user = (await authenticationStateTask).User;
-        // Get the Transactions for the current user        
+        // Get the Transactions for the current user
         transactions = await @Service.GetTransactionsAsync(user.Identity.Name);
         // Get a Dictionary of User Accounts
         accountDict = await @Service.GetAccountKeyValuesAsync(user.Identity.Name);
@@ -136,44 +84,16 @@ else
         catDict = await @Service.GetCatKeyValuesAsync(user.Identity.Name);
     }
 
-    Transactions objTransaction = new Transactions();
-    bool ShowPopup = false;
-    void ClosePopup()
+    async Task ComponentUpdated(string args)
     {
-        ShowPopup = false;
-    }
-    void AddNewTransaction()
-    {
-        objTransaction = new Transactions();
-        // Set Id to 0 so we know it is a new record
-        objTransaction.TransactionId = 0;
-        ShowPopup = true;
-    }
-    async Task SaveTransaction()
-    {
-        ShowPopup = false;
         var user = (await authenticationStateTask).User;
-        // New transaction will have Id set to 0
-        if (objTransaction.TransactionId == 0)
-        {
-            //create new transaction
-            Transactions objNewTransaction = new Transactions();
-            objNewTransaction.AccountId = objTransaction.AccountId;
-            objNewTransaction.TransactionDate = System.DateTime.Now;
-            objNewTransaction.PayeeId = objTransaction.PayeeId;
-            objNewTransaction.ItemId = objTransaction.ItemId;
-            objNewTransaction.Memo = objTransaction.Memo;
-            objNewTransaction.DebitAmount = objTransaction.DebitAmount;
-            objNewTransaction.CreditAmount = objTransaction.CreditAmount;
-            objNewTransaction.UserName = user.Identity.Name;
-
-            var result = @Service.CreateTransactionAsync(objNewTransaction);
-        }
-        else
-        {
-            @* TODO Add method to edit Transactions *@        
-        }
-
         transactions = await @Service.GetTransactionsAsync(user.Identity.Name);
+        StateHasChanged();
     }
+
+    void EditForecast(Transactions transaction)
+    {
+        //
+    }
+
 }
