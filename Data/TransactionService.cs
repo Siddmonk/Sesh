@@ -46,8 +46,25 @@ namespace Sesh.Data
                 ExistingTransaction.ItemId = objTransaction.ItemId;
                 ExistingTransaction.Memo = objTransaction.Memo;
                 ExistingTransaction.DebitAmount = objTransaction.DebitAmount;
-                ExistingTransaction.CreditAmount = objTransaction.CreditAmount;
-                ExistingTransaction.UserName = objTransaction.UserName;
+                ExistingTransaction.CreditAmount = objTransaction.CreditAmount;                
+                var results = _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
+        }
+
+        public Task<bool>
+            DeleteTransactionAsync(Transactions transaction)
+        {
+            var ExistingTransaction = _context.Transactions
+                .Where(x => x.TransactionId == transaction.TransactionId)
+                .FirstOrDefault();
+            if (ExistingTransaction != null)
+            {
+                _context.Transactions.Remove(ExistingTransaction);
                 _context.SaveChanges();
             }
             else

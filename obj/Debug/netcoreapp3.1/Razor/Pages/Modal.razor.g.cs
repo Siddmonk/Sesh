@@ -73,6 +73,13 @@ using Sesh.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 10 "F:\Projects\personal\Budget\Sesh\_Imports.razor"
+using MatBlazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "F:\Projects\personal\Budget\Sesh\Pages\Modal.razor"
 using Sesh.Data;
 
