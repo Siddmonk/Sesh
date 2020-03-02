@@ -75,6 +75,7 @@ namespace Sesh.Data
         }
 
 
+
         //Account Services
 
         public async Task<List<Accounts>>
@@ -90,6 +91,13 @@ namespace Sesh.Data
             return await _context.Accounts
                 .Where(x => x.UserName == strCurrentUser)
                 .AsNoTracking().ToDictionaryAsync(e => e.AccountId, f => f.AccountName);
+        }
+        public Task<Accounts>
+            CreateAccountAsync(Accounts objAccount)
+        {
+            _context.Accounts.Add(objAccount);
+            _context.SaveChanges();
+            return Task.FromResult(objAccount);
         }
         public Task<bool>
             UpdateAccountAsync(Accounts objAccount)
@@ -108,6 +116,24 @@ namespace Sesh.Data
             }
             return Task.FromResult(true);
         }
+        public Task<bool>
+            DeleteAccountAsync(Accounts account)
+        {
+            var ExistingAccount = _context.Accounts
+                .Where(x => x.AccountId == account.AccountId)
+                .FirstOrDefault();
+            if (ExistingAccount != null)
+            {
+                _context.Accounts.Remove(ExistingAccount);
+                _context.SaveChanges();
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+            return Task.FromResult(true);
+        }
+
 
 
         // Payee Services
@@ -145,6 +171,7 @@ namespace Sesh.Data
         }
 
 
+
         // Classification Services
 
         public async Task<List<Classifications>>
@@ -177,6 +204,7 @@ namespace Sesh.Data
             }
             return Task.FromResult(true);
         }
+
 
 
         // Category Services
