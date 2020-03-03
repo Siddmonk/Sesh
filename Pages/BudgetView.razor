@@ -12,6 +12,24 @@
 
 @inherits OwningComponentBase<TransactionService>
 
+
+@* 
+    OBJECTIVES
+    
+    This is the primary view.  All budgeted items will appear on this page.
+    Their budgeted amounts, debits and current balance will be visible.
+    They will be sub-grouped under their classification.  Ideally they would be 
+    reorganized through drag and drop.  More realistically they will be organized 
+    with an up/down button.  The sub-groups shall be collapsible to a single row
+    the row should have totals for the group.
+
+    Ideally clicking on the debited amounts will show the transactions that compose it.
+
+*@
+
+
+
+
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
@@ -25,32 +43,62 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Amount</th>
+
                 <th>Name</th>
                 <th>CurrentBalance</th>
-                <th>Class Id</th>
+                <th>Debits</th>                
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var budgetedItem in budgetedItems)
+            @foreach (var classification in classifications)
             {
+
+                @foreach (var budgetedItem in budgetedItems)
+                {
                 <tr>
-                    <td>@budgetedItem.BudgetedAmount</td>
                     <td>@budgetedItem.BudgetItemName</td>
                     <td>@budgetedItem.CurrentBalance</td>
-                    <td>@budgetedItem.ClassId</td>
+
+                    @* PUT CURRENT DEBITS HERE  ########        *@
+
+
+                    <td>@budgetedItem.BudgetedAmount</td>              
                 </tr>
+                }
             }
         </tbody>
     </table>
 }
 
+
+
+
 @code {
     //AuthenticationState is available as a CascadingParameter
+
+
+
+
+    // We need to get a list of classification for the current user.
+    // We need to get a list of budgetted items for the current user.
+    // we will iterate over classifications creating a table
+    // for each iteration we will iterate over the list of budgeted items creating
+    // subtables. We could add the number of children to the classification table
+    // and do a for i = 0 to (numberOfChildren - 1) and then assign the children
+    // in numeric order to the subtable.  This may be the best solution because
+    // we want the table to be re-orderable, and the children will have to maintain
+    // an order either way.
+    // we will also need a list of all transactions occurring that month for each given
+    // budget item.  
+    // perhaps we can create a dictionary<string, list> to store all of the budgeted items
+
 
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
     List<Categories> budgetedItems;
+    List<Classifications> classifications;
+    List<Transactions> transactions;
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,5 +107,7 @@ else
         // Get the budgeted items for the current user
         // We access BudgetServices using @Service
         budgetedItems = await @Service.GetCategoriesAsync(user.Identity.Name);
+        classifications = await @Service.GetClassificationsAsync(user.Identity.Name);
+
     }
 }
