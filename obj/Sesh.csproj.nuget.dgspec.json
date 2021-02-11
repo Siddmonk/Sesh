@@ -1,34 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Projects\\personal\\Budget\\Sesh\\Sesh.csproj": {}
+    "/home/upstatelloyd/Projects/Sesh/Sesh.csproj": {}
   },
   "projects": {
-    "F:\\Projects\\personal\\Budget\\Sesh\\Sesh.csproj": {
+    "/home/upstatelloyd/Projects/Sesh/Sesh.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Projects\\personal\\Budget\\Sesh\\Sesh.csproj",
+        "projectUniqueName": "/home/upstatelloyd/Projects/Sesh/Sesh.csproj",
         "projectName": "Sesh",
-        "projectPath": "F:\\Projects\\personal\\Budget\\Sesh\\Sesh.csproj",
-        "packagesPath": "C:\\Users\\Vajane\\.nuget\\packages\\",
-        "outputPath": "F:\\Projects\\personal\\Budget\\Sesh\\obj\\",
+        "projectPath": "/home/upstatelloyd/Projects/Sesh/Sesh.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/home/upstatelloyd/Projects/Sesh/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Vajane\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +36,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "MatBlazor": {
               "target": "Package",
@@ -84,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

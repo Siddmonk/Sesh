@@ -4,29 +4,32 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Vajane\.nuget\packages\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/root/.nuget/packages/</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/root/.nuget/packages/</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.4.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.0</NuGetToolVersion>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageFolders)))" />
+  </ItemGroup>
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Content Include="$(NuGetPackageRoot)matblazor\2.2.0\contentFiles\any\netstandard2.1\Properties\launchSettings.json" Condition="Exists('$(NuGetPackageRoot)matblazor\2.2.0\contentFiles\any\netstandard2.1\Properties\launchSettings.json')">
+    <Content Include="$(NuGetPackageRoot)matblazor/2.2.0/contentFiles/any/netstandard2.1/Properties/launchSettings.json" Condition="Exists('$(NuGetPackageRoot)matblazor/2.2.0/contentFiles/any/netstandard2.1/Properties/launchSettings.json')">
       <NuGetPackageId>MatBlazor</NuGetPackageId>
       <NuGetPackageVersion>2.2.0</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Private>False</Private>
-      <Link>Properties\launchSettings.json</Link>
+      <Link>Properties/launchSettings.json</Link>
     </Content>
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\3.1.1\build\netcoreapp2.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\3.1.1\build\netcoreapp2.0\Microsoft.EntityFrameworkCore.Design.props')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\3.1.1\buildTransitive\Microsoft.AspNetCore.Identity.UI.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\3.1.1\buildTransitive\Microsoft.AspNetCore.Identity.UI.props')" />
-    <Import Project="$(NuGetPackageRoot)matblazor\2.2.0\buildTransitive\MatBlazor.props" Condition="Exists('$(NuGetPackageRoot)matblazor\2.2.0\buildTransitive\MatBlazor.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design/3.1.1/build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design/3.1.1/build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui/3.1.1/buildTransitive/Microsoft.AspNetCore.Identity.UI.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui/3.1.1/buildTransitive/Microsoft.AspNetCore.Identity.UI.props')" />
+    <Import Project="$(NuGetPackageRoot)matblazor/2.2.0/buildTransitive/MatBlazor.props" Condition="Exists('$(NuGetPackageRoot)matblazor/2.2.0/buildTransitive/MatBlazor.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\Vajane\.nuget\packages\microsoft.entityframeworkcore.tools\3.1.1</PkgMicrosoft_EntityFrameworkCore_Tools>
+    <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">/root/.nuget/packages/microsoft.entityframeworkcore.tools/3.1.1</PkgMicrosoft_EntityFrameworkCore_Tools>
   </PropertyGroup>
 </Project>
